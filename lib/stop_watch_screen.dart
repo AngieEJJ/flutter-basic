@@ -50,6 +50,11 @@ void _reset() {
     _time = 0;
 }
 
+void _recordLapTime(String time) {
+    _laptimes.insert(0, '${_laptimes.length + 1}등 $time');
+}
+//insert 함수 -> (index, element) // 요소를 삽입할 위치의 인덱스, 삽입할요소 // +1을 해서 계속 늘어남.
+
   //3) 화면이 종료될 떄 타이머 파괴 필요 -> 타이머가 살아있다면 캔슬한다.
   @override
   void dispose() {
@@ -92,19 +97,7 @@ void _reset() {
               width: 100,
               height: 200,
               child: ListView(
-                children: [
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                  Text('111'),
-                ],
+                children: _laptimes.map((e) => Text(e)).toList(),
               ),
             ),
             const Spacer(),
@@ -132,7 +125,11 @@ void _reset() {
                       : const Icon(Icons.play_arrow),
                 ),
                 FloatingActionButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    setState(() {
+                      _recordLapTime('$sec.$hundredth');
+                    });
+                  },
                   backgroundColor: Colors.green,
                   child: const Icon(Icons.add),
                 ),
