@@ -9,7 +9,6 @@ class StopWatchScreen extends StatefulWidget {
 }
 
 class _StopWatchScreenState extends State<StopWatchScreen> {
-  //타이머: 지정된 시간마다 무언갈 수행하는 클래스
 
   Timer? _timer;
   //아무것도 없을 때 null 이기 때문에 물음표를 붙인다.
@@ -32,7 +31,6 @@ class _StopWatchScreenState extends State<StopWatchScreen> {
   //2) 시작, 중지 (타이머 기능 생성)
   void _start() {
     _timer = Timer.periodic(Duration(milliseconds: 10 ), (timer) {
-      //일정 시간이 지날 때마다 오른쪽 {} 함수가 실행된다. // 천분의 1인데 10이니까 100분의 1 //두자리가 나와야 하니까
       setState(() {
         _time++;
       });
@@ -53,7 +51,6 @@ void _reset() {
 void _recordLapTime(String time) {
     _laptimes.insert(0, '${_laptimes.length + 1}등 $time');
 }
-//insert 함수 -> (index, element) // 요소를 삽입할 위치의 인덱스, 삽입할요소 // +1을 해서 계속 늘어남.
 
   //3) 화면이 종료될 떄 타이머 파괴 필요 -> 타이머가 살아있다면 캔슬한다.
   @override
@@ -66,9 +63,6 @@ void _recordLapTime(String time) {
   Widget build(BuildContext context) {
     int sec = _time~/100;
     String hundredth = '${_time % 100}'.padLeft(2, '0');
-    // 2자리로 표시, 2자리가 아니면 왼쪽에 0을 붙인다. //오른쪽으로 하면 20이 되버림
-    //문자열을 특정 길이로 맞춰주는 메서드
-
 
     return Scaffold(
       appBar: AppBar(
