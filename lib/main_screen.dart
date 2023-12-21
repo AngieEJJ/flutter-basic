@@ -16,19 +16,28 @@ class _MainScreenState extends State<MainScreen> {
     ..setNavigationDelegate
     ..loadRequest(Uri.parse('https://flutter.dev'));
 
-
-    @override
-    Widget build(BuildContext context) {
-  return Scaffold(
-  appBar: AppBar(title:const Text('나만의 웹브라우저'),
-    actions: [
-      IconButton(
-        onPressed: () {},
-        icon: const Icon(Icons.add),
-      ),
-    ],
-  ),
-    body: WebViewWidget(controller: _controller),
-  );
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('나만의 웹브라우저'), actions: [
+        IconButton(
+          onPressed: () {},
+          icon: const Icon(Icons.add),
+        ),
+        PopupMenuButton<String>(
+            onSelected: (value) {
+              // print(value);
+            },
+            itemBuilder: (context) => [
+                  const PopupMenuItem<String>(
+                      value: 'https://kakao.com', child: Text('카카오')),
+                  const PopupMenuItem<String>(
+                      value: 'https://naver.com', child: Text('네이버')),
+                  const PopupMenuItem<String>(
+                      value: 'https://google.com', child: Text('구글'))
+                ]),
+      ]),
+      body: WebViewWidget(controller: _controller),
+    );
   }
 }
