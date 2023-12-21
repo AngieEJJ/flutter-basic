@@ -38,10 +38,10 @@ class _MainScreenState extends State<MainScreen> {
                       value: 'https://google.com', child: Text('구글'))
                 ]),
       ]),
-      body: PopScope(
+      body: PopScope( // 뒤로 가기 기능
         canPop: true,
         onPopInvoked: (didPop) async {
-          if (await _controller.canGoBack ()) {
+          if (await _controller.canGoBack ()) { //뒤로 갈 수 있으면 goback
             await _controller.goBack();
           }
         },
