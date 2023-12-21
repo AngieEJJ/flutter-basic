@@ -26,6 +26,7 @@ class _MainScreenState extends State<MainScreen> {
         ),
         PopupMenuButton<String>(
             onSelected: (value) {
+              _controller.loadRequest(Uri.parse(value));
               // print(value);
             },
             itemBuilder: (context) => [
@@ -37,7 +38,15 @@ class _MainScreenState extends State<MainScreen> {
                       value: 'https://google.com', child: Text('구글'))
                 ]),
       ]),
-      body: WebViewWidget(controller: _controller),
+      body: PopScope(
+        canPop: true,
+        onPopInvoked: (didPop) async {
+          if (await _controller.canGoBack ()) {
+            await _controller.goBack();
+          }
+        },
+        child: WebViewWidget(controller: _controller),
+      )
     );
   }
 }
